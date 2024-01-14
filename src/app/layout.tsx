@@ -1,6 +1,11 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import 'react-toastify/dist/ReactToastify.css';
+import TanstackProvider from '@/providers/TanstackProvider'
+import { ToastContainer } from 'react-toastify';
+import ReduxProvider from '@/providers/redux/provider';
+import Spinner from '@/components/spinner/spinner';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +21,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body >
+        <TanstackProvider>
+          <ReduxProvider>
+            <Spinner />
+            <ToastContainer />
+            {children}
+          </ReduxProvider>
+        </TanstackProvider>
+      </body>
     </html>
   )
 }
